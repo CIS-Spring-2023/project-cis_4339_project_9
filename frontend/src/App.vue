@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -8,6 +9,10 @@ export default {
     return {
       orgName: 'Dataplatform'
     }
+  },
+  setup() {
+    const user = useLoggedInUserStore()
+    return {user}
   },
   created() {
     axios.get(`${apiURL}/org`).then((res) => {
@@ -35,7 +40,7 @@ export default {
                 Dashboard
               </router-link>
             </li>
-            <li>
+            <li v-if="user.role === 'editor'">
               <router-link to="/intakeform">
                 <span
                   style="position: relative; top: 6px"
@@ -45,7 +50,7 @@ export default {
                 Client Intake Form
               </router-link>
             </li>
-            <li>
+            <li v-if="user.role === 'editor'">
               <router-link to="/eventform">
                 <span
                   style="position: relative; top: 6px"
@@ -74,6 +79,13 @@ export default {
                 >
                 Find Event
               </router-link>
+            </li>
+            <li class="nav-item">
+                <router-link v-if="user.isLoggedIn" to="/login">
+                    <a href="">
+                    <span @click="$event => user.logout()" class="nav-link"><i class="bi bi-box-arrow-left"></i> Logout</span>
+                    </a>
+                </router-link>
             </li>
           </ul>
         </nav>
