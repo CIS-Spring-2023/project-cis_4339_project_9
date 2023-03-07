@@ -31,7 +31,7 @@ export default {
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
             <li>
-              <router-link to="/">
+              <router-link to="/" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -41,7 +41,7 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role === 'editor'">
-              <router-link to="/intakeform">
+              <router-link to="/intakeform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -51,7 +51,7 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role === 'editor'">
-              <router-link to="/eventform">
+              <router-link to="/eventform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -61,7 +61,7 @@ export default {
               </router-link>
             </li>
             <li>
-              <router-link to="/findclient">
+              <router-link to="/findclient" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -71,7 +71,7 @@ export default {
               </router-link>
             </li>
             <li>
-              <router-link to="/findevents">
+              <router-link to="/findevents" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -80,8 +80,8 @@ export default {
                 Find Event
               </router-link>
             </li>
-            <li class="nav-item">
-                <router-link v-if="user.isLoggedIn" to="/login">
+            <li>
+                <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
                     <a href="">
                     <span @click="$event => user.logout()" class="nav-link"><i class="bi bi-box-arrow-left"></i> Logout</span>
                     </a>

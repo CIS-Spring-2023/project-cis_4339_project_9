@@ -18,7 +18,7 @@ export default {
       error: null
     }
   },
-  setup() {
+  beforeCreate() {
     const loggedInUserStore = useLoggedInUserStore();
 
     if (!loggedInUserStore.isLoggedIn) {
