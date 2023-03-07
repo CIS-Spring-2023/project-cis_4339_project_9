@@ -60,8 +60,8 @@ export default {
                 Create Event
               </router-link>
             </li>
-            <li>
-              <router-link to="/findclient" class="nav-link">
+            <li v-if="user.role">
+              <router-link v-if="user.isLoggedIn" to="/findclient" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -70,8 +70,8 @@ export default {
                 Find Client
               </router-link>
             </li>
-            <li>
-              <router-link to="/findevents" class="nav-link">
+            <li v-if="user.role">
+              <router-link to="/findevents" v-if="user.isLoggedIn" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -80,10 +80,20 @@ export default {
                 Find Event
               </router-link>
             </li>
+            <li v-if="!user.role">
+              <router-link v-if="!user.isLoggedIn" to="/login" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span
+                >
+                Login
+              </router-link>
+            </li>
             <li>
                 <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
-                    <a href="">
-                    <span @click="$event => user.logout()" class="nav-link"><i class="bi bi-box-arrow-left"></i> Logout</span>
+                    <a href="" class="nav-link">
+                    <span @click="$event => user.logout()"><i class="bi bi-box-arrow-left"></i> Logout</span>
                     </a>
                 </router-link>
             </li>

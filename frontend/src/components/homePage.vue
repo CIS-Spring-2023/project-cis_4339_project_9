@@ -18,13 +18,13 @@ export default {
       error: null
     }
   },
-  beforeCreate() {
-    const loggedInUserStore = useLoggedInUserStore();
+  // beforeCreate() {
+  //   const loggedInUserStore = useLoggedInUserStore();
 
-    if (!loggedInUserStore.isLoggedIn) {
-      this.$router.push('/login')
-    }
-  },
+  //   if (!loggedInUserStore.isLoggedIn) {
+  //     this.$router.push('/login')
+  //   }
+  // },
   mounted() {
     this.getAttendanceData()
   },
