@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -8,6 +9,10 @@ export default {
     return {
       orgName: 'Dataplatform'
     }
+  },
+  setup() {
+    const user = useLoggedInUserStore()
+    return {user}
   },
   created() {
     axios.get(`${apiURL}/org`).then((res) => {
@@ -26,7 +31,7 @@ export default {
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
             <li>
-              <router-link to="/">
+              <router-link to="/" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -35,8 +40,8 @@ export default {
                 Dashboard
               </router-link>
             </li>
-            <li>
-              <router-link to="/intakeform">
+            <li v-if="user.role === 'editor'">
+              <router-link to="/intakeform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -45,8 +50,8 @@ export default {
                 Client Intake Form
               </router-link>
             </li>
-            <li>
-              <router-link to="/eventform">
+            <li v-if="user.role === 'editor'">
+              <router-link to="/eventform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -56,7 +61,7 @@ export default {
               </router-link>
             </li>
             <li>
-              <router-link to="/findclient">
+              <router-link to="/findclient" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -66,7 +71,7 @@ export default {
               </router-link>
             </li>
             <li>
-              <router-link to="/findevents">
+              <router-link to="/findevents" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -74,6 +79,13 @@ export default {
                 >
                 Find Event
               </router-link>
+            </li>
+            <li>
+                <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
+                    <a href="">
+                    <span @click="$event => user.logout()" class="nav-link"><i class="bi bi-box-arrow-left"></i> Logout</span>
+                    </a>
+                </router-link>
             </li>
           </ul>
         </nav>
