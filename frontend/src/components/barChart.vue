@@ -31,7 +31,7 @@ export default {
         datasets: [
           {
             data: clientCounts,
-            backgroundColor: [
+            backgroundColor: [ //colors the pie chart 
               '#FF6384',
               '#36A2EB',
               '#FFCE56',
@@ -50,7 +50,7 @@ export default {
             text: 'Clients by Zip Code',
           },
           legend: {
-            position: 'bottom',
+            position: 'bottom', //legend is below pie chart 
           },
         },
       },

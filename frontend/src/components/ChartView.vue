@@ -1,3 +1,5 @@
+// got class from code 
+
 <template>
     <section class="container">
       <h1>Pie Chart</h1>
