@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -8,6 +9,10 @@ export default {
     return {
       orgName: 'Dataplatform'
     }
+  },
+  setup() {
+    const user = useLoggedInUserStore()
+    return {user}
   },
   created() {
     axios.get(`${apiURL}/org`).then((res) => {
@@ -26,7 +31,7 @@ export default {
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
             <li>
-              <router-link to="/">
+              <router-link to="/" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -35,8 +40,8 @@ export default {
                 Dashboard
               </router-link>
             </li>
-            <li>
-              <router-link to="/intakeform">
+            <li v-if="user.role === 'editor'">
+              <router-link to="/intakeform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -45,8 +50,8 @@ export default {
                 Client Intake Form
               </router-link>
             </li>
-            <li>
-              <router-link to="/eventform">
+            <li v-if="user.role === 'editor'">
+              <router-link to="/eventform" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -55,8 +60,19 @@ export default {
                 Create Event
               </router-link>
             </li>
-            <li>
-              <router-link to="/findclient">
+            <li v-if="user.role === 'editor'">
+              <router-link to="/createservice" v-if="user.isLoggedIn" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >add_box</span
+                >
+                <!--Reference for icon: https://materializecss.com/icons.html-->
+                Create Service
+              </router-link>
+            </li>
+            <li v-if="user.role">
+              <router-link v-if="user.isLoggedIn" to="/findclient" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -65,8 +81,8 @@ export default {
                 Find Client
               </router-link>
             </li>
-            <li>
-              <router-link to="/findevents">
+            <li v-if="user.role">
+              <router-link to="/findevents" v-if="user.isLoggedIn" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -74,6 +90,33 @@ export default {
                 >
                 Find Event
               </router-link>
+            </li>
+            <li v-if="user.role">
+              <router-link to="/service" v-if="user.isLoggedIn" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span
+                >
+                Find Service
+              </router-link>
+            </li>
+            <li v-if="!user.role">
+              <router-link v-if="!user.isLoggedIn" to="/login" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span
+                >
+                Login
+              </router-link>
+            </li>
+            <li>
+                <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
+                    <a href="" class="nav-link">
+                    <span @click="$event => user.logout()"><i class="bi bi-box-arrow-left"></i> Logout</span>
+                    </a>
+                </router-link>
             </li>
           </ul>
         </nav>

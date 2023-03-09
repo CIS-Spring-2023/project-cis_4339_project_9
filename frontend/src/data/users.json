@@ -1,0 +1,7 @@
+[
+    {"role": "viewer", "username": "ed", "password": "ed"},
+    {"role": "viewer", "username": "John", "password": "Doe"},
+    {"role": "editor", "username": "Jane", "password": "Smith"},
+    {"role": "viewer", "username": "Bob", "password": "Johnson"},
+    {"role": "editor", "username": "Sara", "password": "Lee"}
+]
