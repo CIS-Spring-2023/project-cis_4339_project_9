@@ -15,7 +15,7 @@ export default {
     return {
       chartHeight: 600, // set the chart height to 400 pixels
       chartWidth: 650, // set the chart width to 400 pixels
-      chartMargin: 20, // Move chart to the center
+      chartMargin: 20, // Move chart to the right
     };
   },
   async mounted() {
