@@ -60,6 +60,17 @@ export default {
                 Create Event
               </router-link>
             </li>
+            <li v-if="user.role === 'editor'">
+              <router-link to="/createservice" v-if="user.isLoggedIn" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >add_box</span
+                >
+                <!--Reference for icon: https://materializecss.com/icons.html-->
+                Create Service
+              </router-link>
+            </li>
             <li v-if="user.role">
               <router-link v-if="user.isLoggedIn" to="/findclient" class="nav-link">
                 <span
@@ -78,6 +89,16 @@ export default {
                   >search</span
                 >
                 Find Event
+              </router-link>
+            </li>
+            <li v-if="user.role">
+              <router-link to="/service" v-if="user.isLoggedIn" class="nav-link">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span
+                >
+                Find Service
               </router-link>
             </li>
             <li v-if="!user.role">

@@ -29,6 +29,12 @@ const routes = [
     component: () => import('../components/updateClient.vue')
   },
   {
+    path: "/updateservice/:name",
+    name: "updateservice",
+    props: true,
+    component: () => import("../components/updateServices.vue"),
+  },
+  {
     path: '/eventform',
     name: 'eventform',
     component: () => import('../components/eventForm.vue')
@@ -37,6 +43,16 @@ const routes = [
     path: '/findevents',
     name: 'findevents',
     component: () => import('../components/findEvents.vue')
+  },
+  {
+    path: "/service",
+    name: "service",
+    component: () => import("../components/findServices.vue"),
+  },
+  {
+    path: "/createservice",
+    name: "createservice",
+    component: () => import("../components/serviceForm.vue"),
   },
   {
     path: '/eventdetails/:id',
