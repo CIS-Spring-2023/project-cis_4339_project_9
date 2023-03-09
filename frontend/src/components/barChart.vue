@@ -1,67 +1,60 @@
+<template>
+    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', margin: chartMargin + 'px', }">
+      <canvas ref="myChart"></canvas>
+    </div>
+</template>
 <script>
-import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables)
+
+import { Chart, registerables } from 'chart.js';
+import data from '@/data/services.json'; // contains dummy data
+
+Chart.register(...registerables);
 
 export default {
-  props: {
-    label: {
-      type: Array
-    },
-    chartData: {
-      type: Array
-    }
+  data() {
+    return {
+      chartHeight: 600, // set the chart height to 400 pixels
+      chartWidth: 650, // set the chart width to 400 pixels
+      chartMargin: 20, // Move chart to the center
+    };
   },
   async mounted() {
-    const backgroundColor = this.chartData.map(() => this.getColor())
-    const borderColor = backgroundColor.map((e) =>
-      e.replace(/[\d\.]+\)$/g, '1)')
-    )
-    await new Chart(this.$refs.attendanceChart, {
-      type: 'bar',
+    const services = data;
+
+    const zipCodes = services.map((service) => service.zipCode);
+    const clientCounts = services.map((service) => service.clientCount);
+
+    new Chart(this.$refs.myChart, {
+      type: "pie",
       data: {
-        labels: this.label,
+        labels: zipCodes,
         datasets: [
           {
-            borderWidth: 1,
-            backgroundColor: backgroundColor,
-            borderColor: borderColor,
-            data: this.chartData
-          }
-        ]
+            data: clientCounts,
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#33FF99',
+              '#FF99CC',
+              '#99CCFF',
+            ],
+          },
+        ],
       },
       options: {
-        scales: {
-          y: {
-            ticks: {
-              stepSize: 1
-            }
-          },
-          x: {
-            gridLines: {
-              display: false
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
         responsive: true,
-        maintainAspectRatio: true
-      }
-    })
+        plugins: {
+          title: {
+            display: true,
+            text: 'Clients by Zip Code',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    });
   },
-  methods: {
-    getColor() {
-      let channel = () => Math.random() * 255
-      return `rgba(${channel()}, ${channel()}, ${channel()}, 0.2)`
-    }
-  }
-}
+};
 </script>
-<template>
-  <div class="shadow-lg rounded-lg overflow-hidden">
-    <canvas class="p-10" ref="attendanceChart"></canvas>
-  </div>
-</template>

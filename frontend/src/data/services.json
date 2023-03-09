@@ -1,0 +1,7 @@
+[  
+    { "zipCode": "10001", "clientCount": 25 },  
+    { "zipCode": "10002", "clientCount": 30 },  
+    { "zipCode": "10003", "clientCount": 20 },  
+    { "zipCode": "10004", "clientCount": 15 },  
+    { "zipCode": "10005", "clientCount": 10 }
+]
