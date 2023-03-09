@@ -2,7 +2,6 @@
 
 <template>
     <section class="container">
-      <h1>Pie Chart</h1>
       <div class="columns">
         <div class="column">
           <barChart />
