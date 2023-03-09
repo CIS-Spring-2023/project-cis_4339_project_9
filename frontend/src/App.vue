@@ -31,7 +31,7 @@ export default {
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
             <li>
-              <router-link to="/chart" class="nav-link"> // populates chart in dashboard 
+              <router-link to="/chart" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
