@@ -32,7 +32,7 @@
                   <div class="flex flex-col">
                   <select
                       class="rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                      v-model="searchBy"
+                      v-model="status"
                   >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
@@ -40,7 +40,7 @@
                   </div>
                   </label>
               </div>
-              <button class="bg-red-700 text-white rounded" type="submit" @click="store.updateService(name,searchBy)">
+              <button class="bg-red-700 text-white rounded" type="submit" @click="updateService">
                   Update
               </button>
               </div>
@@ -53,6 +53,17 @@
   import { useLoggedInUserStore } from "@/store/loggedInUser";
   import servicesStore from '@/store/services'
   export default {
+    props: ['id'],
+    setup() {
+      const store = servicesStore()
+      return {store}
+    },
+    data() {
+      return {
+        name:'',
+        status:''
+      }
+    },
     beforeCreate() {
       const user = useLoggedInUserStore()
       if (user.role !== 'editor') {
@@ -60,20 +71,21 @@
         this.$router.replace({ name: 'service' })
       }
     },
-    data() {
-      const name = this.$route.params.name
-      const store = servicesStore()
-      const servs = store.services
-      const serv = servs.find(function(el) {return el.name.toLowerCase() === name.toLowerCase()})
-      const stat = serv.status
-      return {
-        name,
-        searchBy: stat
-      }
+    created() {
+      const ss = this.store.services
+      console.log(ss)
+      const s = ss.find((el) => el.id === parseInt(this.$route.params.id))
+      this.name = s.name
+      this.status = s.status
     },
-    setup() {
-      const store = servicesStore()
-      return {store}
+    methods: {
+      async updateService() {
+        try {
+          await this.store.updateService(parseInt(this.id), this.name, this.status)
+        } catch (error) {
+          console.error(error)
+        }
+      }
     }
   }
   </script>

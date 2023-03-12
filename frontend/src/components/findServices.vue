@@ -54,13 +54,12 @@ export default {
 
       this.getServices();
     },
-    editService(servname) {
-      this.$router.push({ name: "updateservice", params: { name: servname} });
+    editService(id) {
+      this.$router.push({ name: "updateservice", params: {id} });
     },
     disable(status) {
         this.getServices()
         this.services = this.services.filter(function(el) {return el.status.toLowerCase() === status.toLowerCase()})
-        console.log('CJ: this is services from findServices', this.services)
     },
   },
 };
@@ -135,9 +134,9 @@ export default {
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
-              @click="editService(service.name)"
+              @click="editService(service.id)"
               v-for="service in services"
-              :key="service.name">
+              :key="service.id">
               <td class="p-2 text-left">{{ service.name }}</td>
               <td class="p-2 text-left">{{ service.status}}</td>
             </tr>

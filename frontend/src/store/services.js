@@ -9,17 +9,18 @@ export const servicesStore = defineStore({
   },
   actions: {
     async addServices(name, status) {
-        const s = {name: name, status: status}
+      const s = {id: this.services.length + 1, name: name, status: status}
       this.services.push(s)
       this.$router.push({ name: "service" })
     },
-    async updateService(name, status) {
-      const serviceIndex = this.services.findIndex(service => service.name === name)
-      if (serviceIndex < 0) {
-        throw new Error(`Service ${name} not found`)
+    async updateService(id, name, status) {
+      const service = this.services.find((s) => s.id === id)
+      if (!service) {
+        throw new Error(`Service with id ${id} not found`)
       }
-      this.services[serviceIndex].status = status
-      this.$router.push({ name: "service" })
+      service.name = name
+      service.status = status
+      this.$router.back()
     },
   }
 })

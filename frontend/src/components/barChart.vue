@@ -13,8 +13,8 @@ Chart.register(...registerables);
 export default {
   data() {
     return {
-      chartHeight: 800, // sets the chart height 
-      chartWidth: 850, // sets the chart width 
+      chartHeight: 400, // sets the chart height 
+      chartWidth: 450, // sets the chart width 
     };
   },
   async mounted() {
@@ -43,13 +43,6 @@ export default {
       },
       options: {
         responsive: true,
-        // Reference: https://www.chartjs.org/docs/latest/general/padding.html 
-        layout: {
-            padding: {
-                left: 400,
-                bottom: 180
-            }
-        },
         plugins: {
           title: {
             display: true,

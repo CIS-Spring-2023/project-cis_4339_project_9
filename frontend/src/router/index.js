@@ -30,7 +30,7 @@ const routes = [
     component: () => import('../components/updateClient.vue')
   },
   {
-    path: "/updateservice/:name",
+    path: "/updateservice/:id",
     name: "updateservice",
     props: true,
     component: () => import("../components/updateServices.vue"),
@@ -55,11 +55,11 @@ const routes = [
     name: "createservice",
     component: () => import("../components/serviceForm.vue"),
   },
-  {
-    path: '/chart',
-    name: 'chart',
-    component: ChartView
-  },
+  // {
+  //   path: '/chart',
+  //   name: 'chart',
+  //   component: ChartView
+  // },
   {
     path: '/eventdetails/:id',
     name: 'eventdetails',
