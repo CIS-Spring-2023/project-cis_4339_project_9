@@ -40,16 +40,10 @@ export default {
         endpoint = `services/search/?serviceDate=${this.serviceDate}&searchBy=date`;
       }
       console.log("CJ: will do fake posting later..");
-      //   axios.get(`${apiURL}/${endpoint}`).then((res) => {
-      //     this.services = res.data
-      //   })
     },
     // abstracted method to get services
     getServices() {
         this.services = this.store.services
-      //   axios.get(`${apiURL}/services`).then((res) => {
-      //     this.services = res.data
-      //   })
       window.scrollTo(0, 0);
     },
     clearSearch() {
@@ -64,16 +58,9 @@ export default {
       this.$router.push({ name: "updateservice", params: { name: servname} });
     },
     disable(status) {
-        // this.store.$patch({ 
-        //     services: services.filter(function(el) {return el.name !== name})
-        // })
         this.getServices()
         this.services = this.services.filter(function(el) {return el.status.toLowerCase() === status.toLowerCase()})
         console.log('CJ: this is services from findServices', this.services)
-        // this.store.$subscribe((mutation, state) => {
-        //     mutation.services
-        //     this.services = []//this.services.filter(function(el) {return el.name !== name})
-        // })
     },
   },
 };
@@ -114,15 +101,6 @@ export default {
             />
           </label>
         </div>
-        <!-- Displays service date search field -->
-        <div class="flex flex-col" v-if="searchBy === 'Service Date'">
-          <input
-            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            type="date"
-            v-model="serviceDate"
-            v-on:keyup.enter="disable(searchBy)"
-          />
-        </div>
       </div>
       <div class="mt-5 grid-cols-2">
           <button class="bg-red-700 text-white rounded" type="submit" @click="disable(searchBy)">
@@ -151,23 +129,17 @@ export default {
         <table class="min-w-full shadow-md rounded">
           <thead class="bg-gray-50 text-xl">
             <tr>
-              <th class="p-4 text-left">Service Name</th>
-              <th class="p-4 text-left">Service Date</th>
-              <th class="p-4 text-left">Service Address</th>
+              <th class="p-4 text-left">Service Name </th>
+              <th class="p-4 text-left">Service Status </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
               @click="editService(service.name)"
               v-for="service in services"
-              :key="service.name"
-            ><!-- @click="store.deleteService(service.name)" -->
-            <ul id="myUL">
-                <li><a href="#"> </a></li>
-            </ul>
+              :key="service.name">
               <td class="p-2 text-left">{{ service.name }}</td>
               <td class="p-2 text-left">{{ service.status}}</td>
-              
             </tr>
           </tbody>
         </table>
