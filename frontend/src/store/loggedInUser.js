@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 
-//defining a store
+// defining a store
 export const useLoggedInUserStore = defineStore({
   // id is only required for devtools with the Pinia store
   id: 'loggedInUser',
-  //central part of the store
+  // central part of the store
   state: () => {
     return {
       name: "",
