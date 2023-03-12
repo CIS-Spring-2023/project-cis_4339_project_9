@@ -97,8 +97,7 @@ export default {
               <tr
                 @click="editEvent(event._id)"
                 v-for="event in recentEvents"
-                :key="event._id"
-              >
+                :key="event._id">
                 <td class="p-2 text-left">{{ event.name }}</td>
                 <td class="p-2 text-left">{{ formattedDate(event.date) }}</td>
                 <td class="p-2 text-left">{{ event.attendees.length }}</td>
@@ -111,7 +110,6 @@ export default {
               :label="labels"
               :chart-data="chartData"
             ></AttendanceChart>
-
             <!-- Start of loading animation -->
             <div class="mt-40" v-if="loading">
               <p
@@ -121,7 +119,6 @@ export default {
               </p>
             </div>
             <!-- End of loading animation -->
-
             <!-- Start of error alert -->
             <div class="mt-12 bg-red-50" v-if="error">
               <h3 class="px-4 py-1 text-4xl font-bold text-white bg-red-800">
