@@ -1,4 +1,4 @@
-// got class from code 
+// got code from class
 
 <template>
     <section class="container">

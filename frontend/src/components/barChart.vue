@@ -13,9 +13,8 @@ Chart.register(...registerables);
 export default {
   data() {
     return {
-      chartHeight: 800, // set the chart height to 400 pixels
-      chartWidth: 850, // set the chart width to 400 pixels
-      // chartMargin: 60, // set the chart margin
+      chartHeight: 800, // sets the chart height 
+      chartWidth: 850, // sets the chart width 
     };
   },
   async mounted() {
@@ -31,7 +30,7 @@ export default {
         datasets: [
           {
             data: clientCounts,
-            backgroundColor: [ //colors the pie chart 
+            backgroundColor: [ // colors the pie chart 
               '#FF6384',
               '#36A2EB',
               '#FFCE56',
@@ -57,7 +56,7 @@ export default {
             text: 'Clients by Zip Code',
           },
           legend: {
-            position: 'bottom', //legend is below pie chart 
+            position: 'bottom', // legend is below the pie chart 
           },
         },
       },
