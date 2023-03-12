@@ -41,9 +41,9 @@ export const useLoggedInUserStore = defineStore({
 
 import users from '@/data/users.json'
 
-//simulate a login - we will later use our backend to handle authentication
+// simulate a login - we will later use our backend to handle authentication
 function apiLogin(u, p, r) {
-  const user = users.find(({username, password}) => username === u && password === p);
+  const user = users.find(({username, password, role}) => username === u && password === p && role === r);
   if (user) return Promise.resolve({ isAllowed: true, name: user.username, role: user.role });
 //   if (p === "ed") return Promise.resolve({ isAllowed: false });
   return Promise.reject(new Error("invalid credentials"));
