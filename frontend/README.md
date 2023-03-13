@@ -8,17 +8,21 @@ For form validation [Vuelidate](https://vuelidate-next.netlify.app/) is used.
     npm install
 
 ### Before Startup
-You need to either have a local backend running and or use a cloud deployed backend.
+You need to either have a local backend running and or use a cloud deployed backend for full functionality. However, the frontend will build with limited features i.e.(Services) 
 
 Setup a .env file with following variables, e.g.:
 
     VITE_ROOT_API=http://localhost:3000
 
 VITE_ROOT_API is the URL for the backend API, either on localhost or in the cloud.
-#### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development
 
     npm run dev
 
-##### Compiles and hot-reloads for development in codespaces 
+### Compiles and hot-reloads for development in codespaces 
 
     npm run start -- --host 0.0.0.0
+
+### Logging in to the app
+
+There are two types of users in the app Viewers and Editors. Viewers have access to the Dashboard and entity lookup pages. Editors get access to both lookup and create pages. A list of users are located in the src/data/users.json file.
