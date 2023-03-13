@@ -20,7 +20,7 @@
         pieChartData: pieChartData
       }
     },
-    //establish Chart object after mounting the component
+    // establish Chart object after mounting the component
     mounted() {
       const ctx = document.getElementById('pie-chart');
       new Chart(ctx, this.pieChartData);
