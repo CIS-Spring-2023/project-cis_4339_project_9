@@ -1,7 +1,8 @@
 # Data Platform Frontend
 
-This project uses [VueJS 3](https://vuejs.org/) [Pinia](https://pinia.vuejs.org/) with [Vite](https://vitejs.dev/) and [TailwindCSS](https://tailwindcss.com/).
+This project uses [VueJS 3](https://vuejs.org/) with [Vite](https://vitejs.dev/) and [TailwindCSS](https://tailwindcss.com/).
 For form validation [Vuelidate](https://vuelidate-next.netlify.app/) is used.
+For state management [Pinia](https://pinia.vuejs.org/) is also implemented.
 
 ## Project Setup
 
