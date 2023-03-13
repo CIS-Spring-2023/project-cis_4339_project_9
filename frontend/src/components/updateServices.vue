@@ -40,9 +40,11 @@
                   </div>
                   </label>
               </div>
-              <button class="bg-red-700 text-white rounded" type="submit" @click="updateService">
+              <div class="flex flex-col justify-center">
+                <button class="bg-red-700 text-white rounded" type="submit" @click="updateService">
                   Update
-              </button>
+                </button>
+              </div>
               </div>
           </form>
       </div>
