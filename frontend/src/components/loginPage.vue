@@ -18,7 +18,7 @@
                         <option value="editor">Editor</option>
                       </select>
                   </div>
-                  <button class="btn btn-danger mt-3">Submit</button>
+                  <button class="btn btn-danger mt-3">Log In</button>
               </form>
           </div>
     </div>
