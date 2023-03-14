@@ -51,6 +51,7 @@
   
     </main>
   </template>
+  
   <script>
   import { useLoggedInUserStore } from "@/store/loggedInUser";
   import servicesStore from '@/store/services'

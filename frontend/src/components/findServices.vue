@@ -1,7 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <script>
 import { DateTime } from "luxon";
-// import axios from "axios";
 import servicesStore from '@/store/services'
 const apiURL = import.meta.env.VITE_ROOT_API;
 

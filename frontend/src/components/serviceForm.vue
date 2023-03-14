@@ -30,17 +30,6 @@ export default {
         store.addServices({name: service.name, status: service.status})
         console.log("CJ: will be fake posting by some method", store);
       }
-      //   if (isFormCorrect) {
-      //     axios
-      //       .post(`${apiURL}/services`, this.service)
-      //       .then(() => {
-      //         alert('Service has been added.')
-      //         this.$router.push( 'findServices' )
-      //       })
-      //       .catch((error) => {
-      //         console.log(error)
-      //       })
-      //   }
     },
   },
   // sets validations for the various data properties
@@ -65,7 +54,7 @@ export default {
     </div>
     <div class="px-10 py-20">
       <!-- @submit.prevent stops the submit event from reloading the page-->
-      <form action="#" @submit.prevent=""> <!-- @submit.prevent="$event => store.addServices(service.name, service.status)"-->
+      <form action="#" @submit.prevent=""> 
         <!-- grid container -->
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10"
@@ -83,7 +72,6 @@ export default {
                 v-model="service.name"
               />
               <span class="text-black">
-                <!--v-if="v$.service.name.$error"-->
                 <p
                   class="text-red-700"
                   v-for="error of v$.service.name.$errors"
@@ -109,7 +97,6 @@ export default {
                 </select>
               </div>
               <span class="text-black">
-                <!--v-if="v$.service.name.$error"-->
                 <p
                   class="text-red-700"
                   v-for="error of v$.service.name.$errors"

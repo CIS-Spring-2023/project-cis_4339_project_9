@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChartView from '@/components/ChartView.vue'
 
 // make all paths and names lowercase for consistency
 const routes = [
@@ -55,11 +54,6 @@ const routes = [
     name: "createservice",
     component: () => import("../components/serviceForm.vue"),
   },
-  // {
-  //   path: '/chart',
-  //   name: 'chart',
-  //   component: ChartView
-  // },
   {
     path: '/eventdetails/:id',
     name: 'eventdetails',

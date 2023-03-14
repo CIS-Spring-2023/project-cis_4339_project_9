@@ -144,7 +144,7 @@ export default {
           <!-- form field -->
           <div class="flex flex-col grid-cols-3">
             <label> Services Offered at Event </label>
-            <!-- A service shows up under this when it is created and is only active -->
+            <!-- A service shows up under this when it is created and only if its status is set to active -->
             <template v-for="service in event.services">
             <div>
               <label :for="service.name" class="inline-flex items-center">
