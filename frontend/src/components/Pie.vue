@@ -1,8 +1,19 @@
 <template>
-    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', }">
+    <div class="pie-size">
+      <!-- ChatGBT helped with this part https://chat.openai.com/-->
+    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }">
       <canvas ref="myChart"></canvas>
     </div>
+    </div>
 </template>
+<!-- adjusted the pie chart height and moved the graphs closer-->
+<style>
+.pie-size {
+  top: -150px; /* adjust the height as needed */
+  position: relative;
+}
+</style>
+
 <script>
 
 import { Chart, registerables } from 'chart.js';
@@ -50,7 +61,9 @@ export default {
           },
           legend: {
             position: 'bottom', // legend is below the pie chart 
+            data: [10001, 10002, 10003, 10004, 10005], // data for legend 
           },
+
         },
       },
     });

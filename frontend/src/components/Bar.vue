@@ -15,6 +15,7 @@ export default {
     return {
       chartHeight: 400, // sets the chart height 
       chartWidth: 450, // sets the chart width 
+      Top: 50,
     };
   },
   async mounted() {
@@ -50,6 +51,7 @@ export default {
           },
           legend: {
             position: 'bottom', // legend is below the pie chart 
+            data: [10001, 10002, 10003, 10004, 10005], // data for legend 
           },
         },
       },
