@@ -1,14 +1,12 @@
 <script>
 import { DateTime } from 'luxon'
 import axios from 'axios'
-import AttendanceChart from './barChart.vue'
 import ChartView from './ChartView.vue'
 import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
   components: {
-    AttendanceChart,
     ChartView
   },
   data() {
