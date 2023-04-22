@@ -14,9 +14,9 @@ export const useLoggedInUserStore = defineStore({
   },
   // equivalent to methods in components, perfect to define business logic
   actions: {
-    async login(username, password, role) {
+    async login(username, password) {
       try {
-        const response = await apiLogin(username, password, role);
+        const response = await apiLogin(username, password);
         this.$patch({
           isLoggedIn: response.isAllowed,
           name: response.name,
@@ -42,8 +42,8 @@ export const useLoggedInUserStore = defineStore({
 import users from '@/data/users.json'
 
 // to simulate a login - we will later use our backend to handle authentication
-function apiLogin(u, p, r) {
-  const user = users.find(({username, password, role}) => username === u && password === p && role === r);
+function apiLogin(u, p) {
+  const user = users.find(({username, password}) => username === u && password === p);
   if (user) return Promise.resolve({ isAllowed: true, name: user.username, role: user.role });
   return Promise.reject(new Error("invalid credentials"));
 }
