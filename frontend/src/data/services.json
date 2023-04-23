@@ -1,7 +1,7 @@
 [  
-    { "id": 1, "zipCode": "10001", "clientCount": 25 },  
-    { "id": 2, "zipCode": "10002", "clientCount": 30 },  
-    { "id": 3, "zipCode": "10003", "clientCount": 20 },  
-    { "id": 4, "zipCode": "10004", "clientCount": 15 },  
-    { "id": 5, "zipCode": "10005", "clientCount": 10 }
+    { "id": 1, "org":1, "zipCode": "10001", "clientCount": 25 },  
+    { "id": 2, "org":1, "zipCode": "10002", "clientCount": 30 },  
+    { "id": 3, "org":1, "zipCode": "10003", "clientCount": 20 },  
+    { "id": 4, "org":1, "zipCode": "10004", "clientCount": 15 },  
+    { "id": 5, "org":1, "zipCode": "10005", "clientCount": 10 }
 ]

@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import { useLoggedInUserStore } from '@/store/LoggedInUser'
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -46,7 +47,12 @@ export default {
       this.getClients()
     },
     editClient(clientID) {
-      this.$router.push({ name: 'updateclient', params: { id: clientID } })
+      const user = useLoggedInUserStore()
+      if (user.role != 'editor') {
+        alert('Please sign in as an editor to access this page.')
+      } else {
+        this.$router.push({ name: 'updateclient', params: { id: clientID } })
+      }
     }
   }
 }

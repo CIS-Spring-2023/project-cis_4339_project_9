@@ -1,9 +1,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import axios from "axios";
 import servicesStore from "@/store/services";
-const apiURL = import.meta.env.VITE_ROOT_API;
 
 export default {
   data() {
@@ -28,7 +26,6 @@ export default {
       // If no errors found. isFormCorrect = True then the form is submitted
       if (isFormCorrect) {
         store.addServices({name: service.name, status: service.status})
-        console.log("CJ: will be fake posting by some method", store);
       }
     },
   },

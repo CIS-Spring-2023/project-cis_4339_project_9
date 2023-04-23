@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import servicesStore from '@/store/services'
 import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
@@ -18,6 +19,10 @@ export default {
     axios.get(`${apiURL}/org`).then((res) => {
       this.orgName = res.data.name
     })
+
+    const ss = servicesStore()
+    console.log("CJ: calling getServices in created on App.vue");
+    ss.getServices()
   }
 }
 </script>
@@ -92,7 +97,7 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role">
-              <router-link to="/service" v-if="user.isLoggedIn" class="nav-link">
+              <router-link to="/findservices" v-if="user.isLoggedIn" class="nav-link">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"

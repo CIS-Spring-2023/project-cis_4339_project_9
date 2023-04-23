@@ -59,7 +59,7 @@ export default {
       if (user.role != 'editor') {
         alert('Please sign in as an editor to access this page.')
       } else {
-      this.$router.push({ name: 'eventdetails', params: { id: eventID } })
+        this.$router.push({ name: 'eventdetails', params: { id: eventID } })
       }
     }
   }

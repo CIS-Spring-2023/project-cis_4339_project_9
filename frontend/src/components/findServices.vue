@@ -1,8 +1,10 @@
 <!-- eslint-disable prettier/prettier -->
 <script>
+import axios from 'axios'
 import { DateTime } from "luxon";
 import servicesStore from '@/store/services'
-const apiURL = import.meta.env.VITE_ROOT_API;
+import { useLoggedInUserStore } from '@/store/LoggedInUser'
+const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
   data() {
@@ -18,8 +20,13 @@ export default {
     const store = servicesStore()
     return {store}
   },
-  mounted() {
-    this.getServices();
+  created() {
+    axios.get(`${apiURL}/services`).then((res) => {
+        this.services = res.data
+        this.store.services = res.data
+        this.$router.push({ name: 'findservices' })
+      })
+    // this.services = this.store.services
   },
   methods: {
     // better formattedDate
@@ -41,10 +48,12 @@ export default {
       console.log("CJ: will do fake posting later..");
     },
     // abstracted method to get services
-    getServices() {
-        this.services = this.store.services
-      window.scrollTo(0, 0);
-    },
+    // getServices() {
+    //   console.log("CJ: calling getServices in getServices on findservs");
+    //   this.store.getServices()
+    //   this.services = this.store.services
+    //   window.scrollTo(0, 0);
+    // },
     clearSearch() {
       // Resets all the variables
       this.searchBy = "";
@@ -54,10 +63,15 @@ export default {
       this.getServices();
     },
     editService(id) {
-      this.$router.push({ name: "updateservice", params: {id} });
+      const user = useLoggedInUserStore()
+      if (user.role != 'editor') {
+        alert('Please sign in as an editor to access this page.')
+      } else {
+        this.$router.push({ name: "updateservice", params: {id} });
+      }
     },
     disable(status) {
-        this.getServices()
+        // this.getServices()
         this.services = this.services.filter(function(el) {return el.status.toLowerCase() === status.toLowerCase()})
     },
   },
@@ -133,9 +147,9 @@ export default {
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
-              @click="editService(service.id)"
+              @click="editService(service._id)"
               v-for="service in services"
-              :key="service.id">
+              :key="service._id">
               <td class="p-2 text-left">{{ service.name }}</td>
               <td class="p-2 text-left">{{ service.status}}</td>
             </tr>

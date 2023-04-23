@@ -65,7 +65,12 @@ export default {
     },
     // method to allow click through table to event details
     editEvent(eventID) {
-      this.$router.push({ name: 'eventdetails', params: { id: eventID } })
+      const user = useLoggedInUserStore()
+      if (user.role != 'editor') {
+        alert('Please sign in as an editor to access this page.')
+      } else {
+        this.$router.push({ name: 'eventdetails', params: { id: eventID } })
+      }
     }
   }
 }
