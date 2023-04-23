@@ -4,20 +4,20 @@
     <section class="container">
       <div class="columns">
         <div class="column">
-          <Bar
+          <barChart
              v-if="!loading && !error"
              :label="labels"
             :chart-data="enrolled"
-        ></Bar>
+        ></barChart>
         </div>
         <div class="column">
           <div>
             <div>
-              <Pie
+              <pieChart
                 v-if="!loading && !error"
                 :label="labels"
                 :chart-data="enrolled"
-              ></Pie>
+              ></pieChart>
   
               <!-- Start of loading animation -->
               <div class="mt-40" v-if="loading">
@@ -54,13 +54,13 @@
   </template>
   
   <script>
-  import Bar from "@/components/Bar.vue";
-  import Pie from "@/components/Pie.vue";
+  import barChart from "@/components/barChart.vue";
+  import pieChart from "@/components/pieChart.vue";
 
   export default {
     components: {
-      Bar,
-      Pie,
+      barChart,
+      pieChart,
     },
     data() {
       return {

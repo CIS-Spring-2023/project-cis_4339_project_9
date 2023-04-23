@@ -1,8 +1,19 @@
 <template>
-    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', }">
+    <div class="pie-size">
+      <!-- ChatGPT helped with this part https://chat.openai.com/-->
+    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }">
       <canvas ref="myChart"></canvas>
     </div>
+    </div>
 </template>
+<!-- adjusted the pie chart height and moved the graphs closer-->
+<style>
+.pie-size {
+  top: -150px; /* adjust the height as needed */
+  position: relative;
+}
+</style>
+
 <script>
 
 import { Chart, registerables } from 'chart.js';
@@ -15,7 +26,6 @@ export default {
     return {
       chartHeight: 400, // sets the chart height 
       chartWidth: 450, // sets the chart width 
-      Top: 50,
     };
   },
   async mounted() {
@@ -25,7 +35,7 @@ export default {
     const clientCounts = services.map((service) => service.clientCount);
 
     new Chart(this.$refs.myChart, {
-      type: "bar",
+      type: "pie",
       data: {
         labels: zipCodes,
         datasets: [
@@ -53,6 +63,7 @@ export default {
             position: 'bottom', // legend is below the pie chart 
             data: [10001, 10002, 10003, 10004, 10005], // data for legend 
           },
+
         },
       },
     });

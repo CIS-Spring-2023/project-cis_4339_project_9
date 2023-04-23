@@ -11,6 +11,8 @@
                       <label>Password</label>
                       <input type="password" class="form-control" v-model="password" placeholder="password" required>
                   </div>
+                  <!-- Updated code from Sprint 2 to remove drop-down for role -->
+                  <!-- Included the role in user information -->
                   <button class="btn btn-danger mt-3">Log In</button>
               </form>
           </div>
