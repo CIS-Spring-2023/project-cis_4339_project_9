@@ -70,12 +70,29 @@ export default {
                 axios
                   .post(`${apiURL}/clients`, this.client)
                   .then(() => {
-                    alert('Client added')
-                    this.$router.push({ name: 'findclient' })
+                    console.log('Added client to db')
                   })
                   .catch((error) => {
                     console.log(error)
                   })
+
+                  axios
+                    .get(`${apiURL}/charts/clients-per-zipcode`)
+                    .then(res => {
+                      var newChartData = {
+                        "org": 1,
+                        "zipCode": this.client.address.zip,
+                        "clientCount": res.data.clientCount
+                      }
+                      return axios.post(`${apiURL}/charts`, newChartData)
+                    })
+                    .then(() => {
+                      alert('Chart and client data added')
+                      this.$router.push({ name: 'findclient' })
+                    })
+                    .catch(error => {
+                      console.log(error)
+                    })
               }
             })
         }

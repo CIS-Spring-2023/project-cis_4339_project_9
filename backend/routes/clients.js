@@ -149,4 +149,36 @@ router.delete('/:id', (req, res, next) => {
   })
 })
 
+// GET clients count per zip
+router.get('/clients-per-zipcode', async (req, res, next) => {
+  try {
+    const result = await clients.aggregate([
+      {
+        $match: {
+          "address.zip": {
+            $ne: ""
+          },
+          orgs: org
+        }
+      },
+      {
+        $group: {
+          _id: "$address.zip",
+          count: {
+            $sum: 1
+          }
+        }
+      },
+      {
+        $sort: {
+          count: -1
+        }
+      }
+    ])
+    res.json(result)
+  } catch(error) {
+    next(error)
+  }
+})
+
 module.exports = router
