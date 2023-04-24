@@ -34,6 +34,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // setup middle ware for routes
+app.use('/users', require('./routes/users'))
 app.use('/clients', require('./routes/clients'))
 app.use('/events', require('./routes/events'))
 app.use('/services', require('./routes/services'))

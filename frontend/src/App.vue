@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios'
-import servicesStore from '@/store/services'
-import { useLoggedInUserStore } from "@/store/loggedInUser";
+import { useLoggedInUserStore } from '@/store/loggedInUser'
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -13,16 +12,12 @@ export default {
   },
   setup() {
     const user = useLoggedInUserStore()
-    return {user}
+    return { user }
   },
   created() {
     axios.get(`${apiURL}/org`).then((res) => {
       this.orgName = res.data.name
     })
-
-    const ss = servicesStore()
-    console.log("CJ: calling getServices in created on App.vue");
-    ss.getServices()
   }
 }
 </script>
@@ -66,7 +61,11 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role === 'editor'">
-              <router-link to="/createservice" v-if="user.isLoggedIn" class="nav-link">
+              <router-link
+                to="/createservice"
+                v-if="user.isLoggedIn"
+                class="nav-link"
+              >
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -77,7 +76,11 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role">
-              <router-link v-if="user.isLoggedIn" to="/findclient" class="nav-link">
+              <router-link
+                v-if="user.isLoggedIn"
+                to="/findclient"
+                class="nav-link"
+              >
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -87,7 +90,11 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role">
-              <router-link to="/findevents" v-if="user.isLoggedIn" class="nav-link">
+              <router-link
+                to="/findevents"
+                v-if="user.isLoggedIn"
+                class="nav-link"
+              >
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -97,7 +104,11 @@ export default {
               </router-link>
             </li>
             <li v-if="user.role">
-              <router-link to="/findservices" v-if="user.isLoggedIn" class="nav-link">
+              <router-link
+                to="/findservices"
+                v-if="user.isLoggedIn"
+                class="nav-link"
+              >
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -117,11 +128,13 @@ export default {
               </router-link>
             </li>
             <li>
-                <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
-                    <a href="" class="nav-link">
-                    <span @click="$event => user.logout()"><i class="bi bi-box-arrow-left"></i> Logout</span>
-                    </a>
-                </router-link>
+              <router-link v-if="user.isLoggedIn" to="/login" class="nav-link">
+                <a href="" class="nav-link">
+                  <span @click="($event) => user.logout()"
+                    ><i class="bi bi-box-arrow-left"></i> Logout</span
+                  >
+                </a>
+              </router-link>
             </li>
           </ul>
         </nav>

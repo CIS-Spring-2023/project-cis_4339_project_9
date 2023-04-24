@@ -15,7 +15,7 @@ const app = createApp(App)
 
 // Pinia x Router
 pinia.use(({ store }) => {
-    store.$router = markRaw(router)
+  store.$router = markRaw(router)
 })
 
 app.use(pinia)
