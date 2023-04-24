@@ -175,6 +175,27 @@ const serviceDataSchema = new Schema(
     collection: 'service'
   }
 )
+// Chart Data schema 
+const chartDataSchema = new Schema(
+  {
+    _id: { type: String, default: uuid.v1 },
+    org: {
+      type: String,
+      required: true
+    },
+    zipCode: {
+      type: String,
+      required: true
+    },
+    clientCount: {
+      type: Number,
+      required: true
+    },
+  },
+  {
+    collection: 'chart'
+  }
+);
 
 // create models from mongoose schemas
 const users = mongoose.model('user', userDataSchema)
@@ -182,6 +203,7 @@ const clients = mongoose.model('client', clientDataSchema)
 const orgs = mongoose.model('org', orgDataSchema)
 const events = mongoose.model('event', eventDataSchema)
 const services = mongoose.model('service', serviceDataSchema)
+const charts = mongoose.model('charts', chartDataSchema)
 
 // package the models in an object to export
-module.exports = { users, clients, orgs, events, services }
+module.exports = { users, clients, orgs, events, services, charts }

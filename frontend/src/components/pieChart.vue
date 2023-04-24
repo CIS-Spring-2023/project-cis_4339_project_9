@@ -1,36 +1,38 @@
 <template>
-    <div class="pie-size">
-      <!-- ChatGPT helped with this part https://chat.openai.com/-->
-    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }">
-      <canvas ref="myChart"></canvas>
-    </div>
-    </div>
+  <div class="pie-size">
+    <!-- ChatGPT helped with this part https://chat.openai.com/-->
+  <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }">
+    <canvas ref="myChart"></canvas>
+  </div>
+  </div>
 </template>
 <!-- adjusted the pie chart height and moved the graphs closer-->
 <style>
 .pie-size {
-  top: -150px; /* adjust the height as needed */
-  position: relative;
+top: -150px; /* adjust the height as needed */
+position: relative;
 }
 </style>
 
 <script>
 
 import { Chart, registerables } from 'chart.js';
-import data from '@/data/services.json'; // contains dummy data
+import axios from 'axios'
 
 Chart.register(...registerables);
 
 export default {
-  data() {
-    return {
-      chartHeight: 400, // sets the chart height 
-      chartWidth: 450, // sets the chart width 
-    };
-  },
-  async mounted() {
-    const services = data;
-
+data() {
+  return {
+    chartHeight: 400, // sets the chart height 
+    chartWidth: 450, // sets the chart width 
+  };
+},
+// allows data to populate from apis help from chatgpt
+async mounted() {
+  try {
+    const response = await axios.get('http://localhost:5173/charts');
+    const services = response.data;
     const zipCodes = services.map((service) => service.zipCode);
     const clientCounts = services.map((service) => service.clientCount);
 
@@ -41,7 +43,7 @@ export default {
         datasets: [
           {
             data: clientCounts,
-            backgroundColor: [ // colors the pie chart 
+            backgroundColor: [
               '#FF6384',
               '#36A2EB',
               '#FFCE56',
@@ -67,6 +69,9 @@ export default {
         },
       },
     });
-  },
+  } catch (error) {
+    console.error(error);
+  }
+},
 };
 </script>

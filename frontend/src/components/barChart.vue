@@ -7,7 +7,8 @@
 <script>
 
 import { Chart, registerables } from 'chart.js';
-import data from '@/data/services.json'; // contains dummy data
+import axios from 'axios'
+// import data from '@/data/services.json'; // contains dummy data
 
 Chart.register(...registerables);
 
@@ -19,43 +20,48 @@ export default {
       Top: 50,
     };
   },
+  // allows data to populate from apis help from chatgpt
   async mounted() {
-    const services = data;
+    try {
+      const response = await axios.get('http://localhost:5173/charts');
+      const services = response.data;
+      const zipCodes = services.map((service) => service.zipCode);
+      const clientCounts = services.map((service) => service.clientCount);
 
-    const zipCodes = services.map((service) => service.zipCode);
-    const clientCounts = services.map((service) => service.clientCount);
-
-    new Chart(this.$refs.myChart, {
-      type: "bar",
-      data: {
-        labels: zipCodes,
-        datasets: [
-          {
-            data: clientCounts,
-            backgroundColor: [ // colors the pie chart 
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#33FF99',
-              '#FF99CC',
-              '#99CCFF',
-            ],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Clients by Zip Code',
-          },
-          legend: {
-            display: false
+      new Chart(this.$refs.myChart, {
+        type: "bar",
+        data: {
+          labels: zipCodes,
+          datasets: [
+            {
+              data: clientCounts,
+              backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#33FF99',
+                '#FF99CC',
+                '#99CCFF',
+              ],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Clients by Zip Code',
+            },
+            legend: {
+              display: false,
+            },
           },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>
