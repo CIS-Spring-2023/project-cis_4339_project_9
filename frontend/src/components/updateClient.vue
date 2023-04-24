@@ -81,6 +81,28 @@ export default {
           .put(`${apiURL}/clients/update/${this.id}`, this.client)
           .then(() => {
             alert('Update has been saved.')
+            axios
+              .get(`${apiURL}/clients/clients-per-zipcode`)
+              .then(res => {
+                var clientCount = 1
+                if (res.data.includes(res.data._id)) {
+                  clientCount = int(res.data.count)+1
+                }
+                var newChartData = {
+                  "org": 1,
+                  "zipCode": this.client.address.zip,
+                  "clientCount": clientCount
+                }
+                console.log('CJ:', res.data)
+                return axios.post(`${apiURL}/charts`, newChartData)
+              })
+              .then(() => {
+                alert('Chart and client data added')
+                this.$router.push({ name: 'findclient' })
+              })
+              .catch(error => {
+                console.log(error)
+              })
             this.$router.back()
           })
       }

@@ -60,6 +60,27 @@ export default {
                     .put(`${apiURL}/clients/register/${res.data._id}`)
                     .then(() => {
                       alert('Client registered')
+                      axios
+                        .get(`${apiURL}/clients/clients-per-zipcode`)
+                        .then(res => {
+                          var clientCount = 1
+                          if (res.data.includes(res.data._id)) {
+                            clientCount = int(res.data.count)+1
+                          }
+                          var newChartData = {
+                            "org": 1,
+                            "zipCode": this.client.address.zip,
+                            "clientCount": clientCount
+                          }
+                          return axios.post(`${apiURL}/charts`, newChartData)
+                        })
+                        .then(() => {
+                          alert('Chart and client data added')
+                          this.$router.push({ name: 'findclient' })
+                        })
+                        .catch(error => {
+                          console.log(error)
+                        })
                       this.$router.push({ name: 'findclient' })
                     })
                     .catch((error) => {
@@ -77,13 +98,18 @@ export default {
                   })
 
                   axios
-                    .get(`${apiURL}/charts/clients-per-zipcode`)
+                    .get(`${apiURL}/clients/clients-per-zipcode`)
                     .then(res => {
+                      var clientCount = 1
+                      if (res.data.includes(res.data._id)) {
+                        clientCount = int(res.data.count)+1
+                      }
                       var newChartData = {
                         "org": 1,
                         "zipCode": this.client.address.zip,
-                        "clientCount": res.data.clientCount
+                        "clientCount": clientCount
                       }
+                      console.log('CJ:', res.data)
                       return axios.post(`${apiURL}/charts`, newChartData)
                     })
                     .then(() => {

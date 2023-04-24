@@ -7,19 +7,25 @@ const org = process.env.ORG
 const { charts } = require('../models/models')
 
 
-// POST new client
-router.post('/', (req, res, next) => {
-    const newChart = req.body
-    newChart.orgs = [org]
-    charts.create(newChart, (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        res.json(data)
-      }
-    })
-  })
-// GET 10 most recent clients for org
+// POST or update client
+router.post('/', async (req, res, next) => {
+  try {
+    const chartData = req.body;
+    chartData.org = org;
+
+    const updatedChartData = await charts.findOneAndUpdate(
+      { org: chartData.org, zipCode: chartData.zipCode },
+      { $inc: { clientCount: 1 }, $set: { org: chartData.org, zipCode: chartData.zipCode } },
+      { upsert: true, new: true }
+    );
+
+    res.json(updatedChartData);
+  } catch (error) {
+    return next(error);
+  }
+});
+
+// GET chart data for org
 router.get('/', (req, res, next) => {
     charts
       .find({ orgs: org }, (error, data) => {
@@ -30,4 +36,5 @@ router.get('/', (req, res, next) => {
         }
       })
   })
-  module.exports = router
+
+module.exports = router
