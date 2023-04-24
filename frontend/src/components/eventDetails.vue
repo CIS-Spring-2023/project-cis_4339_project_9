@@ -40,7 +40,11 @@ export default {
           this.clientAttendees.push(res.data)
         })
       })
-      
+      // Updated to make services reload in the "Update Event" section
+      axios.get(`${apiURL}/services`).then((res) => {
+        this.store.services = res.data
+      })
+
       const ss = this.store.services
       console.log('CJ', ss)
       const activeS = ss.filter((el) => el.status === "active")
