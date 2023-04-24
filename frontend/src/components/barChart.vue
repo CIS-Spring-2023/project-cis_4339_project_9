@@ -51,8 +51,7 @@ export default {
             text: 'Clients by Zip Code',
           },
           legend: {
-            position: 'bottom', // legend is below the pie chart 
-            data: [10001, 10002, 10003, 10004, 10005], // data for legend 
+            display: false
           },
         },
       },
