@@ -133,7 +133,8 @@ export default {
         lastName: { required, alpha },
         email: { email },
         address: {
-          city: { required }
+          city: { required },
+          zip: { required }
         },
         phoneNumber: {
           primary: { required, numeric }
@@ -341,11 +342,21 @@ export default {
           <div class="flex flex-col">
             <label class="block">
               <span class="text-gray-700">Zip Code</span>
+              <span style="color: #ff0000">*</span>
               <input
                 type="text"
                 class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 v-model="client.address.zip"
               />
+              <span class="text-black" v-if="v$.client.address.zip.$error">
+                <p
+                  class="text-red-700"
+                  v-for="error of v$.client.address.zip.$errors"
+                  :key="error.$uid"
+                >
+                  {{ error.$message }}!
+                </p>
+              </span>
             </label>
           </div>
           <div></div>
