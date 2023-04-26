@@ -5,9 +5,9 @@ const router = express.Router()
 // importing data model schemas
 const { users } = require('../models/models')
 
-// GET users for org
+// GET users for an org
 router.get('/', (req, res, next) => {
-  const org = process.env.ORG // Assuming that ORG is defined in your environment variables
+  const org = process.env.ORG // Assuming that org is defined in environment variables
   users.find({ org: org }, (error, data) => {
     if (error) {
       return next(error)
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
     }
   })
 })
-// POST new user
+// POST a new user
 router.post('/register', (req, res, next) => {
   const newUser = req.body
 

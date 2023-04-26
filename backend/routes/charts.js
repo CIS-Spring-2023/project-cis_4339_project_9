@@ -7,7 +7,7 @@ const org = process.env.ORG
 const { charts } = require('../models/models')
 
 
-// POST or update client
+// POST chart data
 router.post('/', async (req, res, next) => {
   try {
     const chartData = req.body;
@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// GET chart data for org
+// GET all chart data
 router.get('/', (req, res, next) => {
     charts
       .find({ orgs: org }, (error, data) => {

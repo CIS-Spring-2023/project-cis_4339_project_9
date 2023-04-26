@@ -6,7 +6,7 @@ const org = process.env.ORG
 // importing data model schemas
 const { services } = require('../models/models')
 
-// GET services for org
+// GET all services
 router.get('/', (req, res, next) => {
   services
     .find({ org: org }, (error, data) => {
@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
-// GET service by ID for org
+// GET service by ID
 router.get('/:id', (req, res, next) => {
   const serviceId = req.params.id;
   services
@@ -31,7 +31,7 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-// POST new client
+// POST new service
 router.post('/', (req, res, next) => {
   const newService = req.body
   newService.org = org

@@ -6,7 +6,7 @@ const org = process.env.ORG
 // importing data model schemas
 const { clients } = require('../models/models')
 
-// GET 10 most recent clients for org
+// GET 10 of the most recent clients
 router.get('/', (req, res, next) => {
   clients
     .find({ orgs: org }, (error, data) => {
@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
     .limit(10)
 })
 
-// GET single client by ID
+// GET a single client by ID
 router.get('/id/:id', (req, res, next) => {
   // use findOne instead of find to not return array
   clients.findOne({ _id: req.params.id, orgs: org }, (error, data) => {
@@ -34,7 +34,7 @@ router.get('/id/:id', (req, res, next) => {
   })
 })
 
-// GET entries based on search query
+// GET clients based on the search query
 // Ex: '...?firstName=Bob&lastName=&searchBy=name'
 router.get('/search', (req, res, next) => {
   const dbQuery = { orgs: org }
@@ -104,7 +104,7 @@ router.put('/update/:id', (req, res, next) => {
   })
 })
 
-// PUT add existing client to org
+// PUT existing client to org
 router.put('/register/:id', (req, res, next) => {
   clients.findByIdAndUpdate(
     req.params.id,
@@ -149,7 +149,7 @@ router.delete('/:id', (req, res, next) => {
   })
 })
 
-// GET clients count per zip
+// GET client count per zipcode 
 router.get('/clients-per-zipcode', async (req, res, next) => {
   try {
     const result = await clients.aggregate([

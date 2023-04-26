@@ -6,7 +6,7 @@ const org = process.env.ORG
 // importing data model schemas
 const { events } = require('../models/models')
 
-// GET 10 most recent events for org
+// GET 10 of the most recent events for org
 router.get('/', (req, res, next) => {
   events
     .find({ org: org }, (error, data) => {
@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
     .limit(10)
 })
 
-// GET single event by ID
+// GET a single event by ID
 router.get('/id/:id', (req, res, next) => {
   // use findOne instead of find to not return array
   events.findOne({ _id: req.params.id }, (error, data) => {
@@ -35,7 +35,7 @@ router.get('/id/:id', (req, res, next) => {
   })
 })
 
-// GET events based on search query
+// GET events based on the search query
 // Ex: '...?name=Food&searchBy=name'
 router.get('/search/', (req, res, next) => {
   const dbQuery = { org: org }
@@ -59,7 +59,7 @@ router.get('/search/', (req, res, next) => {
   })
 })
 
-// GET events for which a client is signed up
+// GET events for which a client is signed up for
 router.get('/client/:id', (req, res, next) => {
   events.find({ attendees: req.params.id, org: org }, (error, data) => {
     if (error) {
@@ -85,7 +85,7 @@ router.get('/attendance', (req, res, next) => {
     .sort({ date: 1 })
 })
 
-// POST new event
+// POST a new event
 router.post('/', (req, res, next) => {
   const newEvent = req.body
   newEvent.org = org
@@ -109,7 +109,7 @@ router.put('/update/:id', (req, res, next) => {
   })
 })
 
-// PUT add attendee to event
+// PUT an attendee to an event
 router.put('/register', (req, res, next) => {
   events.find(
     { _id: req.query.event, attendees: req.query.client },
@@ -117,7 +117,7 @@ router.put('/register', (req, res, next) => {
       if (error) {
         return next(error)
       } else {
-        // only add attendee if not yet signed up
+        // only add an attendee to an event if they are not yet signed up for it
         if (!data.length) {
           events.findByIdAndUpdate(
             req.query.event,
@@ -139,7 +139,7 @@ router.put('/register', (req, res, next) => {
   )
 })
 
-// PUT remove attendee from event
+// PUT remove an attendee from an event
 router.put('/deregister', (req, res, next) => {
   events.findByIdAndUpdate(
     req.query.event,
@@ -155,7 +155,7 @@ router.put('/deregister', (req, res, next) => {
   )
 })
 
-// hard DELETE event by ID, as per project specifications
+// hard DELETE an event by ID, as per project specifications
 router.delete('/:id', (req, res, next) => {
   events.findByIdAndDelete(req.params.id, (error, data) => {
     if (error) {
