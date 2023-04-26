@@ -127,21 +127,20 @@ export default {
     // find all events where client appears in attendees array and pull it
     // then pull org from client org array
     deregisterClient() {
-      axios
-        .get(`${apiURL}/events/client/${this.id}`)
-        .then((res) => {
-          res.data.forEach((e) => {
-            axios.put(`${apiURL}/events/deregister`, null, {
-              params: { event: e._id, client: this.id }
-            })
+      this.eventsSelected.forEach((event) => {
+        axios
+          .put(`${apiURL}/events/deregister`, null, {
+            params: { event: event._id, client: this.id }
           })
-        })
-        .finally(
-          axios.put(`${apiURL}/clients/deregister/${this.id}`).then(() => {
-            alert('Client has been deleted.')
-            this.$router.push({ name: 'findclient' })
+          .then(() => this.getEventsRegistered())
+          .catch((error) => {
+            if (error.response.data) {
+              alert(`${event.name}: ${error.response.data}`)
+            }
           })
-        )
+      })
+      // clear events selection after attempting to register for events
+      this.eventsSelected = []
     },
     // unused hard delete method
     deleteClient() {
@@ -383,7 +382,7 @@ export default {
           </div>
           <div class="flex justify-between mt-10 mr-20">
             <button
-              @click="deregisterClient"
+              @click="deleteClient"
               type="submit"
               class="bg-red-700 text-white rounded"
             >
@@ -453,6 +452,15 @@ export default {
                 class="mt-5 bg-red-700 text-white rounded"
               >
                 Add Client to Selected Events
+              </button>
+            </div>
+            <div class="flex justify-between">
+              <button
+                @click="deregisterClient"
+                type="submit"
+                class="mt-5 bg-red-700 text-white rounded"
+              >
+                Remove Client from Selected Events
               </button>
             </div>
           </div>

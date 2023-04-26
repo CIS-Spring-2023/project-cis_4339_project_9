@@ -4,7 +4,7 @@ import { required } from '@vuelidate/validators'
 import axios from 'axios'
 import { DateTime } from 'luxon'
 import servicesStore from '@/store/services'
-import { useLoggedInUserStore } from '@/store/loggedInUser'
+import { useLoggedInUserStore } from "@/store/loggedInUser";
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
@@ -15,6 +15,9 @@ export default {
   },
   data() {
     return {
+      servicesOffered: [],
+      selectedServices: [],
+      deselectedServices: [],
       clientAttendees: [],
       event: {
         name: '',
@@ -48,8 +51,11 @@ export default {
 
       const ss = this.store.services
       console.log('CJ', ss)
+      console.log('CJ event services', this.event.services)
       const activeS = ss.filter((el) => el.status === "active")
-      this.event.services = activeS
+
+      this.selectedServices = this.event.services      
+      this.servicesOffered = activeS
     })
   },
   methods: {
@@ -63,6 +69,8 @@ export default {
         .toISODate()
     },
     handleEventUpdate() {
+      this.event.services = this.selectedServices
+      // this.event.services = this.event.services.filter(item => !deselectedServices.includes(item));
       axios.put(`${apiURL}/events/update/${this.id}`, this.event).then(() => {
         alert('Update has been saved.')
         this.$router.back()
@@ -175,20 +183,44 @@ export default {
           <div class="flex flex-col grid-cols-3">
             <label> Services Offered at Event </label>
             <!-- A service shows up under this when it is created and only if its status is set to active -->
-            <template v-for="service in event.services">
-            <div>
-              <label :for="service.name" class="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  :id="service.name"
-                  :value="service.name"
-                  v-model="selectedServices"
-                  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-                  notchecked
-                />
-                <span class="ml-2">{{ service.name }}</span>
-              </label>
-            </div>
+            <template v-for="service in selectedServices">
+              <div>
+                <label :for="service" class="inline-flex items-center">
+                  <!-- <input
+                    type="checkbox"
+                    :id="service"
+                    :value="service"
+                    v-model="deselectedServices"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+                    notchecked
+                  /> -->
+                  <span class="ml-2">{{ service }}</span>
+                </label>
+              </div>
+            </template>
+          </div>
+
+          <div></div>
+          <div></div>
+          <div></div>
+          <!-- form field -->
+          <div class="flex flex-col grid-cols-3">
+            <label> Services Offered for Events </label>
+            <!-- A service shows up under this when it is created and only if its status is set to active -->
+            <template v-for="service in servicesOffered">
+              <div>
+                <label :for="service.name" class="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    :id="service.name"
+                    :value="service.name"
+                    v-model="selectedServices"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+                    notchecked
+                  />
+                  <span class="ml-2">{{ service.name }}</span>
+                </label>
+              </div>
             </template>
           </div>
         </div>

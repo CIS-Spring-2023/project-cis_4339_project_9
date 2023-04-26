@@ -18,6 +18,19 @@ router.get('/', (req, res, next) => {
     })
 })
 
+// GET service by ID for org
+router.get('/:id', (req, res, next) => {
+  const serviceId = req.params.id;
+  services
+    .findOne({ _id: serviceId, org: org }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.json(data);
+      }
+    });
+});
+
 // POST new client
 router.post('/', (req, res, next) => {
   const newService = req.body
