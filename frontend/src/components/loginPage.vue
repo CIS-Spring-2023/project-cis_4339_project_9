@@ -4,16 +4,16 @@
               <h3 class="text-center">Login</h3>
               <form @submit.prevent=" $event => store.login(username, password)" novalidate="true">
                   <div class="form-group">
-                      <label>User name</label>
-                      <input type="text" class="form-control" v-model="username" placeholder="username" required>
+                      <label>Username</label>
+                      <input type="text" class="form-control" v-model="username" placeholder="Username" required>
                   </div>
                   <div class="form-group">
                       <label>Password</label>
-                      <input type="password" class="form-control" v-model="password" placeholder="password" required>
+                      <input type="password" class="form-control" v-model="password" placeholder="Password" required>
                   </div>
                   <!-- Updated code from Sprint 2 to remove drop-down for role -->
                   <!-- Included the role in user information -->
-                  <button class="btn btn-danger mt-3">Log In</button>
+                  <button class="btn btn-danger mt-3">Login</button>
               </form>
           </div>
     </div>
