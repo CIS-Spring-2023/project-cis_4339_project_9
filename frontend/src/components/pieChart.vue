@@ -1,7 +1,7 @@
 <template>
   <div class="pie-size">
     <!-- ChatGPT helped with this part https://chat.openai.com/-->
-  <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }">
+  <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }" class="min-w-full">
     <canvas ref="myChart"></canvas>
   </div>
   </div>
@@ -59,10 +59,9 @@ async mounted() {
         plugins: {
           title: {
             display: true,
-            text: 'Clients by Zip Code',
           },
           legend: {
-            position: 'bottom', // legend is below the pie chart 
+            position: 'top', // legend is below the pie chart 
             data: [10001, 10002, 10003, 10004, 10005], // data for legend 
           },
 

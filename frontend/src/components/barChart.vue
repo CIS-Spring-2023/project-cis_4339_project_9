@@ -1,6 +1,6 @@
 <!-- Updated code from Sprint 2 to include a bar chart -->
 <template>
-    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', }">
+    <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', }" class="min-w-full p-3">
       <canvas ref="myChart"></canvas>
     </div>
 </template>
