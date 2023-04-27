@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+import servicesStore from '@/store/services'
 import { useLoggedInUserStore } from '@/store/loggedInUser'
 const apiURL = import.meta.env.VITE_ROOT_API
 
@@ -11,12 +12,16 @@ export default {
     }
   },
   setup() {
+    const store = servicesStore()
     const user = useLoggedInUserStore()
-    return { user }
+    return { user, store }
   },
   created() {
     axios.get(`${apiURL}/org`).then((res) => {
       this.orgName = res.data.name
+    })
+    axios.get(`${apiURL}/services`).then((res) => {
+      this.store.services = res.data
     })
   }
 }

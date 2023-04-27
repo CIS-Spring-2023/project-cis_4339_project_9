@@ -13,6 +13,8 @@ export default {
   data() {
     return {
       // removed unnecessary extra array to track services
+      servicesOffered: [],
+      selectedServices: [],
       event: {
         name: '',
         services: [],
@@ -31,18 +33,20 @@ export default {
   // filters the services
   created() {
   // Updated to make services reload in the "Create Event" section
-    axios.get(`${apiURL}/services`).then((res) => {
-      this.store.services = res.data
-    })
+    // axios.get(`${apiURL}/services`).then((res) => {
+    //   this.store.services = res.data
+    // })
 
     const ss = this.store.services
     const activeS = ss.filter((el) => el.status === "active")
-    this.event.services = activeS
+    this.selectedServices = this.event.services      
+    this.servicesOffered = activeS
   },
   methods: {
     async handleSubmitForm() {
       // Checks to see if there are any errors in validation
       const isFormCorrect = await this.v$.$validate()
+      this.event.services = this.selectedServices
       // If no errors found. isFormCorrect = True then the form is submitted
       if (isFormCorrect) {
         axios
@@ -147,23 +151,32 @@ export default {
           <div></div>
           <div></div>
           <!-- form field -->
-          <div class="flex flex-col grid-cols-3">
+          <div class="flex flex-col">
             <label> Services Offered at Event </label>
             <!-- A service shows up under this when it is created and only if its status is set to active -->
-            <template v-for="service in event.services">
-            <div>
-              <label :for="service.name" class="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  :id="service.name"
-                  :value="service.name"
-                  v-model="selectedServices"
-                  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-                  notchecked
-                />
-                <span class="ml-2">{{ service.name }}</span>
-              </label>
-            </div>
+            <template v-for="service in selectedServices">
+                <label :for="service" class="inline-flex items-center">
+                  <span class="ml-2">{{ service }}</span>
+                </label>
+            </template>
+          </div>
+          <div class="flex flex-col">
+            <label> Services Offered for Events </label>
+            <!-- A service shows up under this when it is created and only if its status is set to active -->
+            <template v-for="service in servicesOffered">
+              <div>
+                <label :for="service.name" class="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    :id="service.name"
+                    :value="service.name"
+                    v-model="selectedServices"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+                    notchecked
+                  />
+                  <span class="ml-2">{{ service.name }}</span>
+                </label>
+              </div>
             </template>
           </div>
         </div>

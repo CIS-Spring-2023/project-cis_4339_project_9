@@ -449,7 +449,7 @@ export default {
               <button
                 @click="addToEvent"
                 type="submit"
-                class="mt-5 bg-red-700 text-white rounded"
+                class="mt-5 bg-green-700 text-white rounded"
               >
                 Add Client to Selected Events
               </button>

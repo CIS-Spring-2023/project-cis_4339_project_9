@@ -1,7 +1,7 @@
 <template>
   <div class="pie-size">
     <!-- ChatGPT helped with this part https://chat.openai.com/-->
-  <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }" class="min-w-full">
+  <div :style="{ height: chartHeight + 'px', width: chartWidth + 'px', top: Top + 'px' }" class="min-w-full p-3">
     <canvas ref="myChart"></canvas>
   </div>
   </div>
@@ -39,7 +39,7 @@ async mounted() {
     new Chart(this.$refs.myChart, {
       type: "pie",
       data: {
-        labels: zipCodes,
+        // labels: zipCodes,
         datasets: [
           {
             data: clientCounts,
@@ -62,7 +62,6 @@ async mounted() {
           },
           legend: {
             position: 'top', // legend is below the pie chart 
-            data: [10001, 10002, 10003, 10004, 10005], // data for legend 
           },
 
         },

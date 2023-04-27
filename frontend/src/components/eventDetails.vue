@@ -44,14 +44,12 @@ export default {
           this.clientAttendees.push(res.data)
         })
       })
-      // Updated to make services reload in the "Update Event" section
-      axios.get(`${apiURL}/services`).then((res) => {
-        this.store.services = res.data
-      })
+      // // Updated to make services reload in the "Update Event" section
+      // axios.get(`${apiURL}/services`).then((res) => {
+      //   this.store.services = res.data
+      // })
 
       const ss = this.store.services
-      console.log('CJ', ss)
-      console.log('CJ event services', this.event.services)
       const activeS = ss.filter((el) => el.status === "active")
 
       this.selectedServices = this.event.services      
@@ -70,7 +68,6 @@ export default {
     },
     handleEventUpdate() {
       this.event.services = this.selectedServices
-      // this.event.services = this.event.services.filter(item => !deselectedServices.includes(item));
       axios.put(`${apiURL}/events/update/${this.id}`, this.event).then(() => {
         alert('Update has been saved.')
         this.$router.back()
@@ -180,31 +177,16 @@ export default {
           <div></div>
           <div></div>
           <!-- form field -->
-          <div class="flex flex-col grid-cols-3">
+          <div class="flex flex-col">
             <label> Services Offered at Event </label>
             <!-- A service shows up under this when it is created and only if its status is set to active -->
             <template v-for="service in selectedServices">
-              <div>
                 <label :for="service" class="inline-flex items-center">
-                  <!-- <input
-                    type="checkbox"
-                    :id="service"
-                    :value="service"
-                    v-model="deselectedServices"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-                    notchecked
-                  /> -->
                   <span class="ml-2">{{ service }}</span>
                 </label>
-              </div>
             </template>
           </div>
-
-          <div></div>
-          <div></div>
-          <div></div>
-          <!-- form field -->
-          <div class="flex flex-col grid-cols-3">
+          <div class="flex flex-col">
             <label> Services Offered for Events </label>
             <!-- A service shows up under this when it is created and only if its status is set to active -->
             <template v-for="service in servicesOffered">
