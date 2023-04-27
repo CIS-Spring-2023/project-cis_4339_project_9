@@ -1,3 +1,5 @@
+<!-- allowed pie chart to populate with bar on dashboard -->
+
 <template>
   <div class="pie-size">
     <!-- ChatGPT helped with this part https://chat.openai.com/-->
