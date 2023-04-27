@@ -22,7 +22,7 @@ export const servicesStore = defineStore({
       axios
         .post(`${apiURL}/services`, s)
         .then(() => {
-          alert('Event has been added.')
+          alert('Service has been added.')
           this.$router.push({ name: 'findservices' })
         })
         .catch((error) => {
