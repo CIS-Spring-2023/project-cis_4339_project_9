@@ -175,7 +175,7 @@ const serviceDataSchema = new Schema(
     collection: 'service'
   }
 )
-// Chart Data schema 
+// Chart Data schema for postman
 const chartDataSchema = new Schema(
   {
     _id: { type: String, default: uuid.v1 },

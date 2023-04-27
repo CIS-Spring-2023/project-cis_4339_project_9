@@ -7,7 +7,7 @@ const org = process.env.ORG
 const { charts } = require('../models/models')
 
 
-// POST chart data
+// POST chart data, allows postman to send data 
 router.post('/', async (req, res, next) => {
   try {
     const chartData = req.body;
@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// GET all chart data
+// GET all chart data and populates on dashboard
 router.get('/', (req, res, next) => {
     charts
       .find({ orgs: org }, (error, data) => {
