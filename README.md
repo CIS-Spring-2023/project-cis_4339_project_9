@@ -1,4 +1,7 @@
 # Data Platform Project Setup
+POSTMAN API DOCUMENTATION URL LINK: https://documenter.getpostman.com/view/25780969/2s93eSaFq5
+
+
 
 This project has been developed over time by students in the CIS 4339 course.
 
