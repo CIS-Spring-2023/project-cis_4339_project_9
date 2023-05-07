@@ -29,5 +29,5 @@ There are two types of users in the app Viewers and Editors. Viewers have access
 To log in to the app, follow these steps:
 
 1. On the lefthand sidebar click the login route.
-2. Enter your chosen username, password, and select user type.
+2. Enter your chosen username, password, and select user type.(usrname:fizz,pass:fizz for viewer and usrname:buzz,pass:buzz for editor)
 3. Click on the "Log in" button to access the app.
